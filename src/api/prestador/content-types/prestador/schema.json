@@ -68,6 +68,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::valor.valor"
+    },
+    "horarios": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::horario.horario",
+      "mappedBy": "prestadors"
     }
   }
 }
