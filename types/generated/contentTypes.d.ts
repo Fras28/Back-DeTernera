@@ -838,6 +838,59 @@ export interface ApiComercioComercio extends Schema.CollectionType {
   };
 }
 
+export interface ApiHorarioHorario extends Schema.CollectionType {
+  collectionName: 'horarios';
+  info: {
+    singularName: 'horario';
+    pluralName: 'horarios';
+    displayName: 'Horario';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    diaSemana: Attribute.Enumeration<
+      [
+        'Lunes',
+        'Marters',
+        'Miercoles',
+        'Jueves',
+        'Viernes',
+        'Sabado',
+        'Domingo'
+      ]
+    > &
+      Attribute.Required;
+    options: Attribute.Boolean & Attribute.DefaultTo<false>;
+    prestadors: Attribute.Relation<
+      'api::horario.horario',
+      'manyToMany',
+      'api::prestador.prestador'
+    >;
+    horaInicio: Attribute.Time & Attribute.Required;
+    horaFin: Attribute.Time & Attribute.Required;
+    fechaInicio: Attribute.Date;
+    fechaFin: Attribute.Date;
+    esRecurrente: Attribute.Boolean & Attribute.DefaultTo<true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::horario.horario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::horario.horario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPrestadorPrestador extends Schema.CollectionType {
   collectionName: 'prestadores';
   info: {
@@ -876,6 +929,11 @@ export interface ApiPrestadorPrestador extends Schema.CollectionType {
       'api::prestador.prestador',
       'oneToMany',
       'api::valor.valor'
+    >;
+    horarios: Attribute.Relation<
+      'api::prestador.prestador',
+      'manyToMany',
+      'api::horario.horario'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -993,6 +1051,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::comercio.comercio': ApiComercioComercio;
+      'api::horario.horario': ApiHorarioHorario;
       'api::prestador.prestador': ApiPrestadorPrestador;
       'api::reserva.reserva': ApiReservaReserva;
       'api::valor.valor': ApiValorValor;
