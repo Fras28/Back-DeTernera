@@ -4,6 +4,7 @@
   "info": {
     "singularName": "horario",
     "pluralName": "horarios",
+
     "displayName": "Horario",
     "description": ""
   },
@@ -52,6 +53,7 @@
     "esRecurrente": {
       "type": "boolean",
       "default": true
+
     }
   }
 }

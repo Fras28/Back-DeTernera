@@ -844,7 +844,9 @@ export interface ApiHorarioHorario extends Schema.CollectionType {
     singularName: 'horario';
     pluralName: 'horarios';
     displayName: 'Horario';
+
     description: '';
+
   };
   options: {
     draftAndPublish: true;
