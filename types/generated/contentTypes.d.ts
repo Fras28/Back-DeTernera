@@ -844,20 +844,37 @@ export interface ApiHorarioHorario extends Schema.CollectionType {
     singularName: 'horario';
     pluralName: 'horarios';
     displayName: 'Horario';
+
+    description: '';
+
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    hora_inicio: Attribute.Time;
-    hora_fin: Attribute.Time;
-    fecha_inicio: Attribute.Date;
-    fecha_fin: Attribute.Date;
     diaSemana: Attribute.Enumeration<
-      ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
+      [
+        'Lunes',
+        'Marters',
+        'Miercoles',
+        'Jueves',
+        'Viernes',
+        'Sabado',
+        'Domingo'
+      ]
     > &
       Attribute.Required;
-    recurrente: Attribute.Boolean;
+    options: Attribute.Boolean & Attribute.DefaultTo<false>;
+    prestadors: Attribute.Relation<
+      'api::horario.horario',
+      'manyToMany',
+      'api::prestador.prestador'
+    >;
+    horaInicio: Attribute.Time & Attribute.Required;
+    horaFin: Attribute.Time & Attribute.Required;
+    fechaInicio: Attribute.Date;
+    fechaFin: Attribute.Date;
+    esRecurrente: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -917,7 +934,7 @@ export interface ApiPrestadorPrestador extends Schema.CollectionType {
     >;
     horarios: Attribute.Relation<
       'api::prestador.prestador',
-      'oneToMany',
+      'manyToMany',
       'api::horario.horario'
     >;
     createdAt: Attribute.DateTime;

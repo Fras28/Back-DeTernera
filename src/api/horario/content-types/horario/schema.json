@@ -4,40 +4,56 @@
   "info": {
     "singularName": "horario",
     "pluralName": "horarios",
-    "displayName": "Horario"
+
+    "displayName": "Horario",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "hora_inicio": {
-      "type": "time"
-    },
-    "hora_fin": {
-      "type": "time"
-    },
-    "fecha_inicio": {
-      "type": "date"
-    },
-    "fecha_fin": {
-      "type": "date"
-    },
     "diaSemana": {
       "type": "enumeration",
       "enum": [
-        "lunes",
-        "martes",
-        "miercoles",
-        "jueves",
-        "viernes",
-        "sabado",
-        "domingo"
+        "Lunes",
+        "Marters",
+        "Miercoles",
+        "Jueves",
+        "Viernes",
+        "Sabado",
+        "Domingo"
       ],
       "required": true
     },
-    "recurrente": {
-      "type": "boolean"
+    "options": {
+      "type": "boolean",
+      "default": false
+    },
+    "prestadors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::prestador.prestador",
+      "inversedBy": "horarios"
+    },
+    "horaInicio": {
+      "type": "time",
+      "required": true
+    },
+    "horaFin": {
+      "type": "time",
+      "required": true
+    },
+    "fechaInicio": {
+      "type": "date"
+    },
+    "fechaFin": {
+      "type": "date"
+    },
+    "esRecurrente": {
+      "type": "boolean",
+      "default": true
+
     }
   }
 }

@@ -71,8 +71,9 @@
     },
     "horarios": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::horario.horario"
+      "relation": "manyToMany",
+      "target": "api::horario.horario",
+      "mappedBy": "prestadors"
     }
   }
 }
